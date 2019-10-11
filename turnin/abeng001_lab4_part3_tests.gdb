@@ -26,7 +26,6 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-
 test "PINA: 0x04, 0x00 => PORTB: 0, state: PA2_release"
 set state = wait
 setPINA 0x04
@@ -37,27 +36,9 @@ expectPORTB 0x00
 expect state PA2_release
 checkResult
 
-test "PINA: 0x04, 0x00, 0x01, 0x00 => PORTB: 0, state: X_release"
+test "PINA: 0x04, 0x00, 0x02, 0x00 => PORTB: 1, state: Y_release"
 set state = wait
 setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-expectPORTB 0x00
-expect state X_release
-checkResult
-
-test "PINA: 0x04, 0x00, 0x01, 0x00, 0x02, 0x00 => PORTB: 0, state: Y_release"
-set state = wait
-setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
 continue 2
 setPINA 0x00
 continue 2
@@ -65,17 +46,13 @@ setPINA 0x02
 continue 2
 setPINA 0x00
 continue 2
-expectPORTB 0x00
+expectPORTB 0x01
 expect state Y_release
 checkResult
 
-test "PINA: 0x04, 0x00, 0x01, 0x00, 0x02, 0x00, 0x80 => PORTB: 0, state: Lock_press"
+test "PINA: 0x04, 0x00, 0x02, 0x00, 0x80 => PORTB: 0, state: Lock_press"
 set state = wait
-setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
+setPINA 0x02
 continue 2
 setPINA 0x00
 continue 2
@@ -89,13 +66,9 @@ expectPORTB 0x01
 expect state Lock_press
 checkResult
 
-test "PINA: 0x04, 0x00, 0x01, 0x00, 0x02, 0x00, 0x01, 0x00 => PORTB: 1, state: unlocked"
+test "PINA: 0x04, 0x00, 0x02, 0x00, 0x80, 0x00 => PORTB: 0, state: wait"
 set state = wait
 setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
 continue 2
 setPINA 0x00
 continue 2
@@ -103,33 +76,7 @@ setPINA 0x02
 continue 2
 setPINA 0x00
 continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-expectPORTB 0x01
-expect state unlocked
-checkResult
-
-test "PINA: 0x04, 0x00, 0x01, 0x00, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00 => PORTB: 0, state: wait"
-set state = wait
-setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x02
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
+setPINA 0x80
 continue 2
 setPINA 0x00
 continue 2

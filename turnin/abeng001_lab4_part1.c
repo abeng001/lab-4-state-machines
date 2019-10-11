@@ -14,7 +14,7 @@
 
 typedef enum States { start, wait, PB1_On, release_PB1_On, PB0_On } States;
 
-int exampleTick(int);
+int tick(int);
 
 int main(void) {
 
@@ -23,12 +23,12 @@ int main(void) {
 
 	States state = start;
 	while (1) {
-    state = exampleTick(state);
+    state = tick(state);
 	}
 	return 1;
 }
 
-int exampleTick(int state) {
+int tick(int state) {
 	static unsigned char b;
 	unsigned char A0 = PINA & 0x01;
 	switch (state) { // Transitions
